@@ -1,0 +1,296 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="tituloJanela">Cadastro de Viagens</ui:define>
+        <ui:define name="conteudo">
+           <!-- <p:focus for="formularioCadastroViagens:kminicial"/> -->
+            <h:form id="formularioCadastroViagem">
+                <div class="ui-grid-row ui-grid-responsive"> <!-- INÍCIO DO GRID RESPONSIVO -->
+                    <div class="ui-grid-row"> <!-- INÍCIO DA PRIMEIRA LINHA DO GRID -->
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A DIREITA -->
+                
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Local Origem"/><br/>
+                            <p:selectOneMenu id="localOrigem" value="#{viagemMB.id_local_origem}" style="width: 95%"
+                                             required="true" requiredMessage="Campo origem obrigatório">
+                                <f:selectItem noSelectionOption=""/>
+                                <f:selectItems var="local" value="#{localMB.locais}"
+                                               itemLabel="#{local.nome}"
+                                               itemValue="#{local.id}"/>
+                            </p:selectOneMenu>
+                        </div>
+
+                        
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Veículo"/><br/>
+                            <p:selectOneMenu id="veiculo" value="#{viagemMB.id_veiculo}" style="width: 95%">
+                                <f:selectItem noSelectionOption=""/>
+                                <f:selectItems var="veiculo" value="#{veiculoMB.veiculos}"
+                                               itemLabel="#{veiculo.placa}"
+                                               itemValue="#{veiculo.id}"/>
+                            </p:selectOneMenu>
+                        </div>                        
+                        
+                        <div class="ui-grid-col-2">
+                        <p:outputLabel value="Motorista"/><br/>
+                        <p:selectOneMenu id="motorista" value="#{viagemMB.id_motorista}" style="width: 95%">
+                            <f:selectItem noSelectionOption=""/>
+                            <f:selectItems var="motorista" value="#{motoristaMB.motoristas}"
+                                           itemLabel="#{motorista.nome}"
+                                           itemValue="#{motorista.id}"/>
+                            </p:selectOneMenu>
+                        </div>                            
+                        
+                        <div class="ui-grid-col-2">
+                            <h:outputText value="Data Inicial"/><br/>
+                            <p:calendar id="data_inicial" value="#{viagemMB.data_inicial}" style="width: 20%"/>
+                        </div>                        
+                                                
+                        <div class="ui-grid-col-2">
+                            <h:outputText value="Data Final"/><br/>
+                            <p:calendar id="data_final" value="#{viagemMB.data_final}" style="width: 20%"/>                                                    
+                        </div>
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A ESQUERDA -->                                        
+                    </div> <!-- FIM DA PRIMEIRA LINHA DO GRID -->
+                    <br/>
+                    
+                <div class="ui-grid-row ui-grid-responsive"> <!-- INÍCIO DO GRID RESPONSIVO -->
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-1"><br/></div>
+                        <div class="ui-grid-col-10">
+                        <p:panel>
+                    <div class="ui-grid-row"> <!-- INÍCIO DA TERCEIRA LINHA DO GRID - PARTE DE ITEM DA VIAGEM -->
+
+                        <div class="ui-grid-col-3">
+                        <p:outputLabel value="Cliente"/><br/>
+                        <p:selectOneMenu id="cliente" value="#{viagemMB.id_cliente}" style="width: 95%">
+                            <f:selectItem noSelectionOption=""/>
+                            <f:selectItems var="cliente" value="#{clienteMB.clientes}"
+                                           itemLabel="#{cliente.nome}"
+                                           itemValue="#{cliente.id}"/>
+                            </p:selectOneMenu>
+                        </div>                            
+                        
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Produto"/><br/>
+                            <p:selectOneMenu id="produto" value="#{viagemMB.id_produto}" style="width: 95%">
+                            <f:selectItem noSelectionOption=""/>
+                            <f:selectItems var="produto" value="#{produtoMB.produtos}"
+                                           itemLabel="#{produto.descricao}"
+                                           itemValue="#{produto.id}"/>
+                            </p:selectOneMenu>
+                        </div>                            
+
+                        <div class="ui-grid-col-3">
+                            <p:outputLabel  value="Local Destino"/><br/>
+                            <p:selectOneMenu id="localDestino" value="#{viagemMB.id_local_destino}" style="width: 95%">
+                                <f:selectItem noSelectionOption=""/>
+                                <f:selectItems var="local" value="#{localMB.locais}"
+                                               itemLabel="#{local.nome}"
+                                               itemValue="#{local.id}"/>
+                            </p:selectOneMenu>
+                        </div>               
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="KM Inicial"/><br/>
+                            <p:inputText id="kminicial" value="#{viagemMB.km_inicial}" style="width: 85%"
+                                         required="true" requiredMessage="Campo Km inicial obrigatório" maxlength="8">
+                                <p:ajax event="blur" listener="#{viagemMB.calculaDistancia()}"/>
+                            </p:inputText>
+                        </div>       
+
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="KM Final"/><br/>
+                            <p:inputText id="km_final" value="#{viagemMB.km_final}" style="width: 85%"
+                                         required="true" requiredMessage="Campo Km final obrigatório" maxlength="8">
+                                <p:ajax event="blur" listener="#{viagemMB.calculaDistancia()}" update="distancia"/>
+                            </p:inputText>
+                        </div>                        
+
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Distância"/><br/>
+                            <p:inputText id="distancia" value="#{viagemMB.distancia}" style="width: 85%; background: beige" readonly="true"
+                                         required="true" requiredMessage="Campo distância obrigatório" maxlength="6">
+                            </p:inputText>
+                        </div>                        
+
+                    </div> <!-- FIM DA TERCEIRA LINHA DO GRID -->                    
+                    <br/>
+                    <div class="ui-grid-row"> <!-- INÍCIO DA TERCEIRA LINHA DO GRID - PARTE DE ITEM DA VIAGEM -->                                                  
+                        
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Quantidade"/><br/>
+                            <p:inputText id="unitario" value="#{viagemMB.valor_unitario}" style="width: 85%">
+                                <p:ajax event="blur" listener="#{viagemMB.calculoRepasse()}" update="unitario,totalFrete" />
+                                <f:convertNumber minFractionDigits="2"/>           
+                            </p:inputText>                                
+                        </div>
+                                                
+                        
+                        <div class="ui-grid-col-1"> 
+                            <p:outputLabel value="Repasse"/><br/>
+                            <p:selectOneRadio id="radio_repasse" value="#{viagemMB.repasse}" style="width: 95%">
+                            <f:selectItem itemLabel="Sim" itemValue="sim" />
+                            <br/>
+                            <f:selectItem itemLabel="Não" itemValue="nao" />
+                            <p:ajax listener="#{viagemMB.trocaTipoRepasse()}" event="change" update="compra,venda,unitario,unitarioFrete,totalFrete"/>
+                        </p:selectOneRadio>    
+                        </div>
+
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Compra"/><br/>
+                            <p:inputText id="compra" value="#{viagemMB.valor_compra}" style="width: 85%" disabled="#{!viagemMB.com_repasse}">
+                                <p:ajax event="blur" update="compra,totalFrete"/>
+                                <f:convertNumber minFractionDigits="2"/>   
+                            </p:inputText>
+                        </div>                        
+
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Venda"/><br/>
+                            <p:inputText id="venda" value="#{viagemMB.valor_venda}" style="width: 85%" disabled="#{!viagemMB.com_repasse}">
+
+                                <p:ajax event="blur" listener="#{viagemMB.calculoRepasse()}" update="unitario,totalFrete,venda" />
+                                <f:convertNumber minFractionDigits="2"/>           
+                            </p:inputText>
+                        </div>                        
+
+                        
+                        <!--
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Total Produto"/><br/>
+                            <p:inputText id="total" value="" style="width: 85%; background: beige;" readonly="true">
+                                <p:ajax event="blur" update="venda,total"/>
+                                <f:convertNumber minFractionDigits="2"/>           
+                            </p:inputText>                                
+                        </div>
+                        -->
+                        
+                        <div class="ui-grid-col-1"> 
+                            <p:outputLabel value="Calcular"/><br/>
+                            <p:selectOneRadio id="radio_tipo" value="#{viagemMB.tipo_frete}" style="width: 95%">
+                            <f:selectItem itemLabel="Km" itemValue="km" />
+                            <br/>
+                            <f:selectItem itemLabel="Peso" itemValue="peso" />
+                            <p:ajax listener="#{viagemMB.trocaTipoFrete()}" event="change"  update="totalFrete"/>
+                            <p:ajax listener="#{viagemMB.calculoTotal()}" event="change"  update="totalFrete,unitarioFrete"/>
+                        </p:selectOneRadio>    
+                        </div>
+
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Unitário"/><br/>
+                            <p:inputText id="unitarioFrete" value="#{viagemMB.quantidade}" style="width: 85%" disabled="#{viagemMB.com_repasse}">
+                                <p:ajax event="blur" listener="#{viagemMB.calculoTotal()}" update="unitarioFrete,totalFrete"/>
+                                <f:convertNumber minFractionDigits="2"/>           
+                            </p:inputText>                                
+                        </div>                         
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Total Item"/><br/>
+                            <p:inputText id="totalFrete" value="#{viagemMB.valor_total}" style="width: 85%; background: beige;" readonly="true">
+                                <f:convertNumber minFractionDigits="2"/>           
+                            </p:inputText>
+                                
+                        </div>
+                        <div class="ui-grid-col-1" align="left" style="width: 11%">
+                            <p:commandLink action="#{viagemMB.adicionarLista()}" 
+                                           update="cliente,produto,localDestino,kminicial,km_final,distancia,unitarioFrete,totalViagem
+                                           itensViagem,radio_repasse,compra,venda,unitario,radio_tipo,totalFrete,growl">
+                                <h:graphicImage value="/resources/images/add.png" title="Adicionar" width="60" height="60"/>
+                            </p:commandLink>
+                        </div>
+                        
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Total Viagem"/><br/>
+                            <p:inputText id="totalViagem" value="#{viagemMB.total_viagem}" style="width: 85%; background: beige;" readonly="true">
+                                <f:convertNumber minFractionDigits="2"/>           
+                            </p:inputText>
+                                
+                        </div>
+
+                        
+                    </div> <!-- FINAL DA QUARTA LINHA DO GRID -->                    
+                      
+                    <div class="ui-grid-row"> <!-- INÍCIO DA PRIMEIRA LINHA DO GRID -->
+                        
+                            <div class="ui-grid-col-2">
+                            <p:outputLabel value="Financeiro"/><br/>
+                            <p:selectOneMenu id="console" value="#{viagemMB.financeiro}" style="width:125px">
+                                <f:selectItem noSelectionOption=""/>
+                                <f:selectItem itemLabel="Recebido" itemValue="recebido"/>
+                                <f:selectItem itemLabel="Aberto" itemValue="aberto"/>
+                            </p:selectOneMenu>                            
+                            </div>
+                        
+                        <div class="ui-grid-col-2">
+                            <h:outputText value="Data Recebimento"/><br/>
+                            <p:calendar id="data_financ" value="#{viagemMB.data_financeiro}" style="width: 20%"/>   
+                        </div>
+                        
+                    </div>                                                                            
+                    
+                       
+                    <br/>
+                    <div class="ui-grid-row"> <!-- INÍCIO DA QUINTA LINHA DO GRID - PARTE DA TABELA DE ITENS -->
+                        <div class="ui-grid-col-12">
+                            <p:dataTable id="itensViagem" value="#{viagemMB.itensViagem}" var="item"
+                                         paginator="true" rows="3" paginatorPosition="bottom"
+                                         emptyMessage="Nenhum registro encontrado">
+                                
+                                <f:facet name="header">Itens</f:facet>
+                                
+                                <p:column headerText="Código" width="2" style="text-align: center">#{item.idProduto.id}</p:column>    
+                                <p:column headerText="Descrição" width="5">#{item.idProduto.descricao}</p:column>
+                                <p:column headerText="Cliente" width="2">#{item.idCliente.nome}</p:column>
+                                <p:column headerText="Destino" width="2">#{item.idLocalDestino.nome}</p:column>
+                                <p:column headerText="Quantidade" width="2">
+                                    <h:outputText value="#{item.quantidade}">
+                                        <f:convertNumber minFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Total Frete" width="2">
+                                    <h:outputText value="#{item.valorTotal}">
+                                        <f:convertNumber minFractionDigits="2"/>
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="Excluir" width="5" style="text-align: center">
+                                    <p:commandLink action="#{viagemMB.removeLista(item)}"
+                                                   onclick="if(!confirm('Confirma exclusão do registro?'))return false" update="itensViagem">
+                                        <h:graphicImage value="/resources/images/excluir.png" title="Excluir" width="25" height="25"/>
+                                    </p:commandLink>
+                                </p:column>                                
+                                
+                            
+                            </p:dataTable>
+                        </div>
+
+                    </div> <!-- FIM DA QUINTA LINHA DO GRID - PARTE DA TABELA DE ITENS  -->               
+                    </p:panel>
+                        </div>
+                    </div>
+                </div>                    
+                    <br/>
+                    <div class="ui-grid-row"> <!-- INÍCIO DA LINHA DE BOTÕES DO GRID -->
+                        <div class="ui-grid-col-1" align="right" style="width: 11%">
+                            <h:commandLink action="#{viagemMB.gravar()}">
+                                <h:graphicImage value="/resources/images/salvar.png" title="Salvar" width="40" height="40"/>
+                            </h:commandLink>
+                        </div>
+                        <div class="ui-grid-col-2" align="right" style="width: 4%">
+                            <h:commandLink action="#{viagemMB.voltar()}" immediate="true">
+                                <h:graphicImage value="/resources/images/cancelar.png" title="Cancelar" width="40" height="40"/>
+                            </h:commandLink>
+                        </div>
+                    </div> <!-- FINAL DA LINHA DE BOTÕES DO GRID -->                    
+                    
+                </div> <!-- FIM DO GRID RESPONSIVO -->                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+    
+</html>
+

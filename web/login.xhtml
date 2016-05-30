@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body onload="#{usuarioMB.inicializarSistema()}"> 
+        <h:form id="form">  
+            <p:ajaxStatus onstart="PF('loadingDialog').show()" onsuccess="PF('loadingDialog').hide()">
+                <p:dialog showHeader="false" visible="false" closable="false" resizable="false" draggable="false"
+                          modal="true" widgetVar="loadingDialog">
+                    <p:graphicImage library="images" name="loading.gif" width="50" height="50"/>
+                </p:dialog>
+            </p:ajaxStatus> 
+            <p:growl id="growl" life="5000"/>
+            <p:dialog visible="true" header="Autenticação" closable="false" resizable="false"
+                      draggable="false" style="border-radius: 20px;" showEffect="fade">
+                <br/>
+                <p:inputText value="#{usuarioMB.login}" placeholder="Login"/><br/><br/>
+                <p:password value="#{usuarioMB.senha}" placeholder="Senha"/><br/><br/>
+                <div align="center">
+                    <p:commandButton value="Confirmar" action="#{usuarioMB.autenticacao()}" update="growl"/>
+                </div>
+                <br/>
+            </p:dialog> 
+        </h:form>
+    </h:body>
+</html>
+

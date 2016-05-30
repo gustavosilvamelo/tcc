@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="titulojanela">Cadastro de Cliente</ui:define>
+        <ui:define name="conteudo">
+           <p:focus for="formularioCadastroCliente:nome"/>            
+            <h:form id="formularioCadastroCliente">
+                <div class="ui-grid-row ui-grid-responsive"> <!-- INÍCIO DO GRID RESPONSIVO -->
+                    <div class="ui-grid-row"> <!-- INÍCIO DA PRIMEIRA LINHA DO GRID -->
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A DIREITA -->
+                        
+                        <div class="ui-grid-col-3">
+                            <p:outputLabel value="Nome:"/><br/>
+                            <p:inputText id="nome" value="#{clienteMB.nome}" style="width: 95%"
+                                         required="true" requiredMessage="Campo nome obrigatório" maxlength="30"/>
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Endereço:"/><br/>
+                            <p:inputText id="endereco" value="#{clienteMB.endereco}" style="width: 93%"
+                                         required="true" requiredMessage="Campo endereço obrigatório" maxlength="30"/>  
+                        </div>
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Número:"/><br/>
+                            <p:inputText id="numero" value="#{clienteMB.numero}" style="width: 85%"
+                                         required="true" requiredMessage="Campo numero obrigatório" maxlength="5"/>
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Bairro:"/><br/>
+                            <p:inputText id="bairro" value="#{clienteMB.bairro}" style="width: 93%"
+                                         required="true" requiredMessage="Campo bairro obrigatório" maxlength="30"/>
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Complemento:"/><br/>
+                            <p:inputText id="complemento" value="#{clienteMB.complenento}" style="width: 95%" maxlength="30"/>
+                        </div>                        
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A ESQUERDA -->                        
+                    </div> <!-- FIM DA PRIMEIRA LINHA DO GRID -->
+                    <br/>
+                    <div class="ui-grid-row"> <!-- INÍCIO DA SEGUNDA LINHA DO GRID -->
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A DIREITA -->
+                        
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Cidade"/><br/>
+                            <p:selectOneMenu value="#{clienteMB.id_cidade}" style="width: 95%">
+                                <f:selectItem noSelectionOption=""/>
+                                <f:selectItems var="cidade" value="#{cidadeMB.cidades}"
+                                               itemLabel="#{cidade.nome}"
+                                               itemValue="#{cidade.id}"/>
+                            </p:selectOneMenu>                        
+                        </div>                        
+                        <div class="ui-grid-col-1"> <br/>                      
+                            <p:selectOneRadio id="radio_cpfcnpj" value="#{clienteMB.tipo}" style="width: 95%">
+                            <f:selectItem itemLabel="CPF" itemValue="cpf" />
+                            <br/>
+                            <f:selectItem itemLabel="CNPJ" itemValue="cnpj" />
+                            <p:ajax listener="#{clienteMB.trocaTipo()}" event="change" update="cpf,cnpj"/>
+                        </p:selectOneRadio>    
+                        </div>                        
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel id="label_cpf" value="CPF:" /><br/>
+                            <p:inputMask mask="999.999.999-99" id="cpf" value="#{clienteMB.cpf_cnpj}" style="width: 85%" disabled="#{!clienteMB.exibe_cpf}"/>                            
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel id="label_cnpj" value="CNPJ:" rendered="true"/><br/>
+                            <p:inputMask mask="99.999.999/9999-99" id="cnpj" value="#{clienteMB.cpf_cnpj}" style="width: 95%" disabled="#{!clienteMB.exibe_cnpj}"/>                               
+                        </div>
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Telefone:"/><br/>
+                            <p:inputMask mask="(99) 9999-9999" id="telefone" value="#{clienteMB.telefone}" style="width: 90%"
+                                         maxlength="13"/>
+                        </div>
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Celular:"/><br/>
+                            <p:inputMask mask="(99) 9 9999-9999" id="celular" value="#{clienteMB.celular}" style="width: 90%"
+                                         maxlength="14"/>
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Email:"/><br/>
+                            <p:inputText id="email" value="#{clienteMB.email}" style="width: 95%"/>
+                        </div>
+                        
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A ESQUERDA -->                                                
+                    </div> <!-- FIM DA SEGUNDA LINHA DO GRID -->
+                    <br/>
+                    <div class="ui-grid-row"> <!-- INÍCIO DA LINHA DE BOTÕES DO GRID -->
+                        <div class="ui-grid-col-1" align="right" style="width: 11%">
+                            <h:commandLink action="#{clienteMB.gravar()}">
+                                <h:graphicImage value="/resources/images/salvar.png" title="Salvar" width="40" height="40"/>
+                            </h:commandLink>
+                        </div>
+                        <div class="ui-grid-col-2" align="right" style="width: 4%">
+                            <h:commandLink action="#{clienteMB.voltar()}" immediate="true">
+                                <h:graphicImage value="/resources/images/cancelar.png" title="Cancelar" width="40" height="40"/>
+                            </h:commandLink>
+                        </div>
+                    </div> <!-- FINAL DA LINHA DE BOTÕES DO GRID -->
+                </div> <!-- FIM DO GRID RESPONSIVO -->
+            </h:form>
+        </ui:define>
+    </ui:composition>
+    
+</html>
+

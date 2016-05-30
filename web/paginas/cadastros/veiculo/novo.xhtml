@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="tituloJanela">Cadastro de Veículo</ui:define>
+        <ui:define name="conteudo">
+            <p:focus for="formularioCadastroVeiculo:placa"/>
+            <h:form id="formularioCadastroVeiculo">
+                <div class="ui-grid-row ui-grid-responsive"> <!-- INÍCIO DO GRID RESPONSIVO -->
+                    <div class="ui-grid-row"> <!-- INÍCIO DA PRIMEIRA LINHA DO GRID -->
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A DIREITA -->
+                        
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Placa:"/><br/>
+                            <p:inputMask mask="aaa-9999" id="placa" value="#{veiculoMB.placa}" style="width: 83%"
+                                         required="true" requiredMessage="Campo placa obrigatório" maxlength="7"/>
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Marca:"/><br/>
+                            <p:selectOneMenu value="#{veiculoMB.id_marca}" style="width: 95%">
+                                <f:selectItem noSelectionOption=""/>
+                                <f:selectItems var="marca" value="#{marcaMB.marcas}"
+                                               itemLabel="#{marca.nome}"
+                                               itemValue="#{marca.id}"/>    
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Modelo:"/><br/>
+                            <p:selectOneMenu value="#{veiculoMB.id_modelo}" style="width: 95%">
+                                <f:selectItem noSelectionOption=""/>
+                                <f:selectItems var="modelo" value="#{modeloMB.modelos}"
+                                               itemLabel="#{modelo.nome}"
+                                               itemValue="#{modelo.id}"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Tara: (Kg)"/><br/>
+                            <p:inputText id="tara" value="#{veiculoMB.tara}" style="width: 85%"
+                                         required="true" requiredMessage="Campo tara obrigatório" maxlength="6"/>
+                        </div>
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Lotação: (Kg)"/><br/>
+                            <p:inputText id="lotacao" value="#{veiculoMB.lotacao}" style="width: 80%"
+                                         required="true" requiredMessage="Campo lotação obrigatório" maxlength="6"/>
+                        </div>                     
+                        <div class="ui-grid-col-2">
+                            <p:outputLabel value="Hodômetro: (Km)"/><br/>
+                            <p:inputText id="hodometro" value="#{veiculoMB.hodometro}" style="width: 85%"
+                                         required="true" requiredMessage="Campo hodômetro obrigatório" maxlength="6"/>
+                        </div>                        
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Chassi:"/><br/>
+                            <p:inputText id="chassi" value="#{veiculoMB.chassi}" style="width: 85%"
+                                         required="true" requiredMessage="Campo chassi obrigatório" maxlength="30"/>
+                        </div>                        
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A ESQUERDA -->                        
+                    </div> <!-- FIM DA PRIMEIRA LINHA DO GRID -->
+                    <br/>
+                    <div class="ui-grid-row"> <!-- INÍCIO DA SEGUNDA LINHA DO GRID -->
+                        <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A DIREITA -->
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Renavam"/><br/>
+                            <p:inputMask mask="99999999999-9" id="renavam" value="#{veiculoMB.renavam}" style="width: 90%"
+                                         required="true" requiredMessage="Campo renavam obrigatório"/>
+                        </div>                            
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="RNTRC:"/><br/>
+                            <p:inputText id="rntrc" value="#{veiculoMB.rntrc}" style="width: 85%"
+                                         required="true" requiredMessage="Campo RNTRC obrigatório" maxlength="8"/>
+                        </div>
+                         <div class="ui-grid-col-4">
+                            <p:outputLabel value="Observação"/><br/>
+                            <p:inputTextarea id="observacao" value="#{veiculoMB.observacao}" style="width: 85%"
+                                         required="true" requiredMessage="Campo RNTRC obrigatório" maxlength="250"/>
+                        </div>
+                    </div> <!-- FINAL DA SEGUNDA LINHA DO GRID -->
+                    
+                    <br/>                    
+                    <div class="ui-grid-row"> <!-- INÍCIO DA LINHA DE BOTÕES DO GRID -->
+                        <div class="ui-grid-col-1" align="right" style="width: 11%">
+                            <h:commandLink action="#{veiculoMB.gravar()}">
+                                <h:graphicImage value="/resources/images/salvar.png" title="Salvar" width="40" height="40"/>
+                            </h:commandLink>
+                        </div>
+                        <div class="ui-grid-col-2" align="right" style="width: 4%">
+                            <h:commandLink action="#{veiculoMB.voltar()}" immediate="true">
+                                <h:graphicImage value="/resources/images/cancelar.png" title="Cancelar" width="40" height="40"/>
+                            </h:commandLink>
+                        </div>
+                    </div> <!-- FINAL DA LINHA DE BOTÕES DO GRID -->
+                </div> <!-- FIM DO GRID RESPONSIVO -->
+            </h:form>
+        </ui:define>
+    </ui:composition>
+    
+</html>
+

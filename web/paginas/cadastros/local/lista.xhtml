@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="tituloJanela">Locais</ui:define>
+        <ui:define name="conteudo">
+            <h:form>
+                <div class="ui-grid ui-grid-responsive"> <!-- INÍCIO DO GRID RESPONSIVO -->
+                    <div class="ui-grid-row"> <!-- INÍCIO DO GRID ROW DA TABELA -->
+                        <div class="ui-grid-col-1"></div> <!-- COLUNA PARA ESPAÇAMENTO DA TABELA NO INÍCIO -->
+                        
+                        <div class="ui-grid-col-10"> <!-- PRIMEIRA COLUNA DA TABELA -->
+                            <p:dataTable value="#{localMB.locais}" var="local"
+                                         paginator="true" rows="10" paginatorPosition="bottom"
+                                         emptyMessage="Nenhum registro encontrado">
+                                
+                                <f:facet name="header">Locais</f:facet>
+                                
+                                <p:column headerText="Código" width="2" style="text-align: center">#{local.id}</p:column>
+                                <p:column headerText="Nome" width="50">#{local.nome}</p:column>
+                                <p:column headerText="Endereço" width="70">#{local.endereco}</p:column>
+                                <p:column headerText="Nº" width="2">#{local.numero}</p:column>
+                                <p:column headerText="Bairro" width="30">#{local.bairro}</p:column>
+                                <p:column headerText="Cidade" width="30">#{local.idCidade.nome}</p:column>
+                                
+                                <p:column headerText="Editar" width="5" style="text-align: center">
+                                    <h:commandLink action="#{localMB.alteracao(local)}">
+                                        <h:graphicImage value="/resources/images/editar.png" title="Editar" width="25" height="25"/>
+                                    </h:commandLink>
+                                </p:column>
+                                <p:column headerText="Excluir" width="5" style="text-align: center">
+                                    <h:commandLink action="#{localMB.excluir(local)}"
+                                                   onclick="if(!confirm('Confirma exclusão do registro?'))return false">
+                                        <h:graphicImage value="/resources/images/excluir.png" title="Excluir" width="25" height="25"/>
+                                    </h:commandLink>
+                                </p:column>                                                                
+                            </p:dataTable>
+                        </div> <!-- FIM DA PRIMEIRA COLUNA DA TABELA -->                 
+                    </div> <!-- FIM DO GRID ROW DA TABELA -->
+                    <br/>
+                        <div class="ui-grid-row"> <!-- INÍCIO DO GRID ROW DOS BOTÕES -->
+                            <div class="ui-grid-col-1" align="right" style="width: 12%"> <!-- INÍCIO DA COLUNA BOTÃO NOVO -->
+                                <h:commandLink action="#{localMB.novo()}">
+                                    <h:graphicImage value="/resources/images/add.png" title="Novo" width="65" height="65"/>
+                                </h:commandLink>
+                            </div> <!-- FIM DACOLUNA BOTÃO NOVO -->
+
+                            <div class="ui-grid-col-2" align="right" style="width: 5%"> <!-- INÍCIO DA COLUNA BOTÃO VOLTAR -->
+                                <p:commandLink action="#{localMB.voltarIndex()}" immediate="true">
+                                    <h:graphicImage value="/resources/images/voltar.png" title="Voltar" width="60" height="60"/>
+                                </p:commandLink>
+                            </div> <!-- FIM DA COLUNA BOTÃO VOLTAR -->
+                            <div class="ui-grid-col-6"></div> <!-- COLUNAS PARA ESPAÇAMENTO CORRETO DOS BOTÕES -->
+                        </div> <!-- FIM DO GRID ROW DOS BOTÕES -->                                       
+                    
+                </div> <!-- FIM DO GRID RESPONSIVO -->
+            </h:form>
+        </ui:define>
+    </ui:composition>
+    
+</html>
+

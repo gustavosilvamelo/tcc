@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="tituloJanela">Cadastro de Unidade</ui:define>
+        <ui:define name="conteudo">
+            <p:focus for="formularioCadastroUnidade:descricao"/>
+            <h:form id="formularioCadastroUnidade">
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+
+                        <div class="ui-grid-col-1"> <br/> </div>
+
+                        <div class="ui-grid-col-8">
+                            <p:outputLabel value="Descrição:"/><br/>
+                            <p:inputText id="descricao" value="#{unidadeMB.descricao}" style="width: 96%"
+                                         required="true" requiredMessage="Campo descrição obrigatório" maxlength="30"/>
+                        </div>
+
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Sigla"/><br/>
+                            <p:inputText id="sigla" value="#{unidadeMB.sigla}" style="width: 80%"
+                                         required="true" requiredMessage="Campo sigla obrigatório" maxlength="2"/>
+                        </div>
+
+                        <div class="ui-grid-col-1">
+                            <p:outputLabel value="Quantidade"/><br/>
+                            <p:inputText id="quantidade" value="#{unidadeMB.quantidade}" style="width: 80%"
+                                         required="true" requiredMessage="Campo quantidade obrigatório"/>
+                        </div>                                            
+                        <div class="ui-grid-col-1"></div>
+                    </div>
+                </div>
+                <br/>
+                <div class="ui-grid-row">                                                           
+                    <div class="ui-grid-col-1" align="right" style="width: 11%">
+                        <h:commandLink action="#{unidadeMB.alterar()}">
+                            <h:graphicImage value="/resources/images/salvar.png" title="Salvar" width="40" height="40"/>
+                        </h:commandLink>                        
+                    </div>                         
+                    <div class="ui-grid-col-2" align="right" style="width: 4%" >
+                        <p:commandLink action="#{unidadeMB.voltar()}" immediate="true">
+                            <h:graphicImage value="/resources/images/cancelar.png" title="Cancelar" width="40" height="40"/>
+                        </p:commandLink>                       
+                    </div>                    
+                </div>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+
