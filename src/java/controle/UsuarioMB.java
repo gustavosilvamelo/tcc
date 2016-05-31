@@ -2,7 +2,6 @@ package controle;
 
 import dao.UsuarioDao;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -90,7 +89,7 @@ public class UsuarioMB implements Serializable{
             UtilMensagens.mensagemErro("Informe o login");
         }else{
             if(senha.equals("")){
-                UtilMensagens.mensagemErro("Inforem a senha");
+                UtilMensagens.mensagemErro("Informe a senha");
             }else{
                 UsuarioDao usuarioDao = new UsuarioDao();
                 Usuario usu = usuarioDao.consultarLogin(login);
