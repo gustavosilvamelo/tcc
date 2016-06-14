@@ -25,10 +25,7 @@ public class LocalMB implements Serializable{
     private List<Local> locais;
     private Local local;
     private LocalDao localDao;
-    
-    private Cliente cliente;
-    private ClienteDao clienteDao;
-    
+        
     private Cidade cidade;
     private CidadeDao cidadeDao;
     
@@ -69,11 +66,7 @@ public class LocalMB implements Serializable{
         local.setEndereco(endereco);
         local.setNumero(numero);
         local.setBairro(bairro);
-        local.setComplemento(complemento);
-        
-        clienteDao = new ClienteDao();
-        cliente = clienteDao.consultar(id_cliente);
-        local.setIdCliente(cliente);
+        local.setComplemento(complemento);        
         
         cidadeDao = new CidadeDao();
         cidade = cidadeDao.consultar(id_cidade);
@@ -87,7 +80,6 @@ public class LocalMB implements Serializable{
         numero = obj.getNumero();
         bairro = obj.getBairro();
         complemento = obj.getComplemento();
-        id_cliente = obj.getIdCliente().getId();
         id_cidade = obj.getIdCidade().getId();
         return "altera?faces-redirect=true";
     }
@@ -158,22 +150,6 @@ public class LocalMB implements Serializable{
 
     public void setLocalDao(LocalDao localDao) {
         this.localDao = localDao;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public ClienteDao getClienteDao() {
-        return clienteDao;
-    }
-
-    public void setClienteDao(ClienteDao clienteDao) {
-        this.clienteDao = clienteDao;
     }
 
     public Cidade getCidade() {

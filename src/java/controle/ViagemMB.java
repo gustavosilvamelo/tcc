@@ -299,6 +299,8 @@ public class ViagemMB implements Serializable{
         quantidade = 0;
         valor_unitario = 0;
         valor_total = 0;        
+        total_viagem = 0;
+        
     }
     
     public void removeLista(ItemViagem item){

@@ -55,9 +55,6 @@ public class Local implements Serializable {
     @JoinColumn(name = "id_cidade", referencedColumnName = "id")
     @ManyToOne
     private Cidade idCidade;
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    @ManyToOne
-    private Cliente idCliente;
     @OneToMany(mappedBy = "idLocalOrigem")
     private Collection<Viagem> viagemCollection;
     @OneToMany(mappedBy = "idLocalDestino")
@@ -124,14 +121,6 @@ public class Local implements Serializable {
 
     public void setIdCidade(Cidade idCidade) {
         this.idCidade = idCidade;
-    }
-
-    public Cliente getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
     }
 
     @XmlTransient

@@ -67,8 +67,6 @@ public class Cliente implements Serializable {
     private String email;
     @Column(name = "tipo")
     private String tipo;
-    @OneToMany(mappedBy = "idCliente")
-    private Collection<Local> localCollection;
     @JoinColumn(name = "id_cidade", referencedColumnName = "id")
     @ManyToOne
     private Cidade idCidade;
@@ -168,15 +166,6 @@ public class Cliente implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    @XmlTransient
-    public Collection<Local> getLocalCollection() {
-        return localCollection;
-    }
-
-    public void setLocalCollection(Collection<Local> localCollection) {
-        this.localCollection = localCollection;
     }
 
     public Cidade getIdCidade() {
