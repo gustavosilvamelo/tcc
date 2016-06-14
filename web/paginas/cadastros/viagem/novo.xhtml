@@ -29,7 +29,7 @@
                         
                         <div class="ui-grid-col-2">
                             <p:outputLabel value="Veículo"/><br/>
-                            <p:selectOneMenu id="veiculo" value="#{viagemMB.id_veiculo}" style="width: 95%">
+                            <p:selectOneMenu id="veiculo" value="#{viagemMB.id_veiculo}" style="width: 95%" required="true" requiredMessage="Campo veículo obrigatório" maxlength="30">
                                 <f:selectItem noSelectionOption=""/>
                                 <f:selectItems var="veiculo" value="#{veiculoMB.veiculos}"
                                                itemLabel="#{veiculo.placa}"
@@ -39,7 +39,7 @@
                         
                         <div class="ui-grid-col-2">
                         <p:outputLabel value="Motorista"/><br/>
-                        <p:selectOneMenu id="motorista" value="#{viagemMB.id_motorista}" style="width: 95%">
+                        <p:selectOneMenu id="motorista" value="#{viagemMB.id_motorista}" style="width: 95%" required="true" requiredMessage="Campo motorista obrigatório" maxlength="30">
                             <f:selectItem noSelectionOption=""/>
                             <f:selectItems var="motorista" value="#{motoristaMB.motoristas}"
                                            itemLabel="#{motorista.nome}"
@@ -49,12 +49,12 @@
                         
                         <div class="ui-grid-col-2">
                             <h:outputText value="Data Inicial"/><br/>
-                            <p:calendar id="data_inicial" value="#{viagemMB.data_inicial}" style="width: 20%"/>
+                            <p:calendar id="data_inicial" value="#{viagemMB.data_inicial}" style="width: 20%" required="true" requiredMessage="Campo data inicial obrigatório" maxlength="30"/>
                         </div>                        
                                                 
                         <div class="ui-grid-col-2">
                             <h:outputText value="Data Final"/><br/>
-                            <p:calendar id="data_final" value="#{viagemMB.data_final}" style="width: 20%"/>                                                    
+                            <p:calendar id="data_final" value="#{viagemMB.data_final}" style="width: 20%" required="true" requiredMessage="Campo data final obrigatório" maxlength="30"/>                                                   
                         </div>
                         <div class="ui-grid-col-1"> <br/> </div> <!-- COLUNA DE ESPAÇAMENTO A ESQUERDA -->                                        
                     </div> <!-- FIM DA PRIMEIRA LINHA DO GRID -->
@@ -125,7 +125,7 @@
                         
                         <div class="ui-grid-col-1">
                             <p:outputLabel value="Quantidade"/><br/>
-                            <p:inputText id="unitario" value="#{viagemMB.valor_unitario}" style="width: 85%">
+                            <p:inputText id="unitario" value="#{viagemMB.quantidade}" style="width: 85%">
                                 <p:ajax event="blur" listener="#{viagemMB.calculoRepasse()}" update="unitario,totalFrete" />
                                 <f:convertNumber minFractionDigits="2"/>           
                             </p:inputText>                                
@@ -183,7 +183,7 @@
 
                         <div class="ui-grid-col-1">
                             <p:outputLabel value="Unitário"/><br/>
-                            <p:inputText id="unitarioFrete" value="#{viagemMB.quantidade}" style="width: 85%" disabled="#{viagemMB.com_repasse}">
+                            <p:inputText id="unitarioFrete" value="#{viagemMB.valor_unitario}" style="width: 85%" disabled="#{viagemMB.com_repasse}">
                                 <p:ajax event="blur" listener="#{viagemMB.calculoTotal()}" update="unitarioFrete,totalFrete"/>
                                 <f:convertNumber minFractionDigits="2"/>           
                             </p:inputText>                                

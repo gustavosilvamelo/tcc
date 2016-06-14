@@ -47,7 +47,7 @@
                         
                         <div class="ui-grid-col-2">
                             <p:outputLabel value="Cidade"/><br/>
-                            <p:selectOneMenu value="#{clienteMB.id_cidade}" style="width: 95%">
+                            <p:selectOneMenu value="#{clienteMB.id_cidade}" style="width: 95%" required="true" requiredMessage="Campo cidade obrigatório" maxlength="30">
                                 <f:selectItem noSelectionOption=""/>
                                 <f:selectItems var="cidade" value="#{cidadeMB.cidades}"
                                                itemLabel="#{cidade.nome}"
@@ -90,7 +90,7 @@
                     <br/>
                     <div class="ui-grid-row"> <!-- INÍCIO DA LINHA DE BOTÕES DO GRID -->
                         <div class="ui-grid-col-1" align="right" style="width: 11%">
-                            <h:commandLink action="#{clienteMB.gravar()}">
+                            <h:commandLink action="#{clienteMB.alterar()}">
                                 <h:graphicImage value="/resources/images/salvar.png" title="Salvar" width="40" height="40"/>
                             </h:commandLink>
                         </div>

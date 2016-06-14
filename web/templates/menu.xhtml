@@ -23,7 +23,11 @@
                     <p:menuitem value="Unidades" url="/paginas/cadastros/unidade/lista.xhtml" update="@form"/>                    
                     <p:menuitem value="Veículos" url="/paginas/cadastros/veiculo/lista.xhtml" update="@form"/>                    
                 </p:submenu>
-                <p:menuitem value="Viagens" url="/paginas/cadastros/viagem/lista.xhtml" update="@form"/> 
+                <p:menuitem value="Viagens" url="/paginas/cadastros/viagem/lista.xhtml" update="@form"></p:menuitem>
+                <p:submenu label="Relatorios">
+                    <p:menuitem value="Viagens" url="/paginas/cadastros/relatorio/relatorioViagem.xhtml" update="@form"/>      
+                    <p:menuitem value="Clientes" url="/paginas/cadastros/relatorio/relatorioCliente.xhtml" update="@form"/>      
+                </p:submenu>
             </p:menubar>
             </div>            
         </div>

@@ -17,7 +17,8 @@
                 
                         <div class="ui-grid-col-2">
                             <p:outputLabel value="Local Origem"/><br/>
-                            <p:selectOneMenu id="localOrigem" value="#{viagemMB.id_local_origem}" style="width: 95%">
+                            <p:selectOneMenu id="localOrigem" value="#{viagemMB.id_local_origem}" style="width: 95%"
+                                             required="true" requiredMessage="Campo origem obrigatório">
                                 <f:selectItem noSelectionOption=""/>
                                 <f:selectItems var="local" value="#{localMB.locais}"
                                                itemLabel="#{local.nome}"
@@ -182,7 +183,7 @@
 
                         <div class="ui-grid-col-1">
                             <p:outputLabel value="Unitário"/><br/>
-                            <p:inputText id="unitarioFrete" value="#{viagemMB.quantidade}" style="width: 85%" disabled="#{viagemMB.com_repasse}">
+                            <p:inputText id="unitarioFrete" value="#{viagemMB.valor_unitario}" style="width: 85%" disabled="#{viagemMB.com_repasse}">
                                 <p:ajax event="blur" listener="#{viagemMB.calculoTotal()}" update="unitarioFrete,totalFrete"/>
                                 <f:convertNumber minFractionDigits="2"/>           
                             </p:inputText>                                
@@ -209,8 +210,30 @@
                             </p:inputText>
                                 
                         </div>
+
+                        
                     </div> <!-- FINAL DA QUARTA LINHA DO GRID -->                    
-                    <br/>  
+                      
+                    <div class="ui-grid-row"> <!-- INÍCIO DA PRIMEIRA LINHA DO GRID -->
+                        
+                            <div class="ui-grid-col-2">
+                            <p:outputLabel value="Financeiro"/><br/>
+                            <p:selectOneMenu id="console" value="#{viagemMB.financeiro}" style="width:125px">
+                                <f:selectItem noSelectionOption=""/>
+                                <f:selectItem itemLabel="Recebido" itemValue="recebido"/>
+                                <f:selectItem itemLabel="Aberto" itemValue="aberto"/>
+                            </p:selectOneMenu>                            
+                            </div>
+                        
+                        <div class="ui-grid-col-2">
+                            <h:outputText value="Data Recebimento"/><br/>
+                            <p:calendar id="data_financ" value="#{viagemMB.data_financeiro}" style="width: 20%"/>   
+                        </div>
+                        
+                    </div>                                                                            
+                    
+                       
+                    <br/>
                     <div class="ui-grid-row"> <!-- INÍCIO DA QUINTA LINHA DO GRID - PARTE DA TABELA DE ITENS -->
                         <div class="ui-grid-col-12">
                             <p:dataTable id="itensViagem" value="#{viagemMB.itensViagem}" var="item"

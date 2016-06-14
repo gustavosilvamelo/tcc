@@ -22,21 +22,24 @@
                                 <f:facet name="header">Viagens</f:facet>
                                 
                                 <p:column headerText="Código" width="2" style="text-align: center">#{viagem.id}</p:column>
-                                <p:column headerText="Cliente" width="20">#{viagem.idLocalOrigem.idCliente.nome}</p:column>
+                                
                                 <p:column headerText="Data Inicial" width="10">
                                     <h:outputText value="#{viagem.dataInicial}">
                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                     </h:outputText>
                                 </p:column>
-                                <p:column headerText="Data Final" width="10">#{viagem.dataFinal}</p:column>
-                                <p:column headerText="Motorista" width="20">#{viagem.idMotorista.nome}</p:column>
+                                <p:column headerText="Data Final" width="10">
+                                    <h:outputText value="#{viagem.dataFinal}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Financeiro" width="20">#{viagem.financeiro}</p:column>
                                 <p:column headerText="Veículo" width="10">#{viagem.idVeiculo.placa}</p:column>
                                 <p:column headerText="Valor Total" width="10">
                                     <h:outputText value="#{viagem.totalViagem}">
                                         <f:convertNumber minFractionDigits="2"/>
                                     </h:outputText>
                                 </p:column>
-
                                 <p:column headerText="Editar" width="5" style="text-align: center">
                                     <h:commandLink action="#{viagemMB.alteracao(viagem)}">
                                         <h:graphicImage value="/resources/images/editar.png" title="Editar" width="25" height="25"/>

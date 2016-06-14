@@ -54,15 +54,7 @@
                             <p:outputLabel value="Complemento"/><br/>
                             <p:inputText id="complemento" value="#{localMB.complemento}" style="width: 93%"/>
                         </div>
-                        <div class="ui-grid-col-2">
-                            <p:outputLabel value="Cliente"/><br/>
-                            <p:selectOneMenu value="#{localMB.id_cliente}" style="width: 95%">
-                                <f:selectItem noSelectionOption=""/>
-                                <f:selectItems var="cliente" value="#{clienteMB.clientes}"
-                                               itemLabel="#{cliente.nome}"
-                                               itemValue="#{cliente.id}"/>                            
-                            </p:selectOneMenu>                        
-                        </div>
+                        
                     </div> <!-- FIM DA SEGUNDA LINHA DO GRID -->
                     <br/>
                     <div class="ui-grid-row"> <!-- INÍCIO DA LINHA DE BOTÕES DO GRID -->

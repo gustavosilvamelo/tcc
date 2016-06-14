@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="tituloJanela">Relatório de Viagens</ui:define>
+        <ui:define name="conteudo">            
+            <h:form id="relatorioViagem">
+                <div class="ui-grid ui-grid-responsive">
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">                    
+                    <div class="ui-grid-col-1"> <br/> </div>
+               <!--         
+                        <div class="ui-grid-col-2">
+                            <h:outputText value="Data Inicial"/><br/>
+                            <p:calendar id="data_ini" value="" style="width: 20%"/>   
+                        </div>
+                        <div class="ui-grid-col-2">
+                            <h:outputText value="Data Final"/><br/>
+                            <p:calendar id="data_final" value="" style="width: 20%"/>   
+                        </div>
+                   -->     
+                    <div class="ui-grid-col-2">
+                        <p:outputLabel value="Financeiro"/><br/>
+                        <p:selectOneMenu id="console" value="#{emissaoRelatorioViagem.financeiro}" style="width:125px">
+                            <f:selectItem noSelectionOption=""/>
+                                <f:selectItem itemLabel="Recebido" itemValue="recebido"/>
+                                <f:selectItem itemLabel="Aberto" itemValue="aberto"/>
+                            </p:selectOneMenu> 
+                    </div>                    
+                </div>
+                <br/>
+                </div>
+                    <div class="ui-grid-row"> <!-- INÍCIO DA LINHA DE BOTÕES DO GRID -->
+                        <div class="ui-grid-col-1" align="right" style="width: 11%">
+                            <h:commandLink target="_blank" action="#{emissaoRelatorioViagem.emitirRelatorio()}">
+                                <h:graphicImage value="/resources/images/relatorio.png" title="Salvar" width="40" height="40"/>
+                            </h:commandLink>
+                        </div>
+                        <div class="ui-grid-col-2" align="right" style="width: 4%">
+                            <h:commandLink action="#{unidadeMB.voltarIndex()}" immediate="true">
+                                <h:graphicImage value="/resources/images/cancelar.png" title="Cancelar" width="40" height="40"/>
+                            </h:commandLink>
+                        </div>
+                    </div> <!-- FINAL DA LINHA DE BOTÕES DO GRID -->                    
+                    
+                </div>
+                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+

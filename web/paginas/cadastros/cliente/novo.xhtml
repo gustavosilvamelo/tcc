@@ -47,7 +47,7 @@
                         
                         <div class="ui-grid-col-2">
                             <p:outputLabel value="Cidade"/><br/>
-                            <p:selectOneMenu value="#{clienteMB.id_cidade}" style="width: 95%">
+                            <p:selectOneMenu value="#{clienteMB.id_cidade}" style="width: 95%" required="true" requiredMessage="Campo cidade obrigatório" maxlength="30">
                                 <f:selectItem noSelectionOption=""/>
                                 <f:selectItems var="cidade" value="#{cidadeMB.cidades}"
                                                itemLabel="#{cidade.nome}"
